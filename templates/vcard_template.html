@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vCard Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+<body>
+    <pre id="vcard-data" style="display: none;">
+        {{ vcard_data }}
+    </pre>
+    <div id="qrcode"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const vcardData = document.getElementById("vcard-data").textContent.trim();
+            const qrCodeDiv = document.getElementById("qrcode");
+
+            const qr = new QRious({
+                element: qrCodeDiv,
+                size: 200,
+                value: vcardData,
+            });
+
+            // Create an <img> element to display the QR code as an image
+            const qrCodeImg = document.createElement("img");
+            qrCodeImg.src = qr.toDataURL();
+            qrCodeDiv.appendChild(qrCodeImg); // Append the <img> element to the <div>
+
+            // console.log(qr);
+        });
+    </script>
+</body>
+</html>
